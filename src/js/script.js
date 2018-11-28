@@ -15,6 +15,7 @@
       blocks.push(table);
     }
   };
+
   const renderBlocks = function () {
     container.innerHTML = '';
     for (let i = 0; i < blocks.length; i++) {
@@ -28,6 +29,7 @@
       container.appendChild(createBlock);
     }
   };
+
   const moveBlock = function (item1, item2) {
     const temp = blocks[item1];
     if (temp == undefined || temp > 4) {
@@ -48,18 +50,22 @@
   const randomSort = function () {
     return Math.random() - 0.5;
   };
+
   const winCombination = function () {
     for (let i = 0; i < blocks.length; i++) {
       if (blocks[i].id !== i + 1) {
         return;
       }
     }
+
     alert('WIN!!!');
   };
+
   shuffleBtn.addEventListener('click', () => {
     blocks.sort(randomSort);
     renderBlocks();
   });
+
   document.addEventListener('keydown', (event) => {
     const emptyBlock = findEmptyBlock();
     
@@ -72,6 +78,7 @@
         renderBlocks();
         setTimeout(winCombination, 0);
         break;
+
       case 37:
         if (emptyBlock == 11 || emptyBlock == 7 || emptyBlock == 3) {
           return;
@@ -80,11 +87,13 @@
         renderBlocks();
         setTimeout(winCombination, 0);
         break;
+
       case 40:
         moveBlock(findEmptyBlock() - 4, findEmptyBlock());
         renderBlocks();
         setTimeout(winCombination, 0);
         break;
+
       case 38:
         moveBlock(findEmptyBlock() + 4, findEmptyBlock());
         renderBlocks();
@@ -92,6 +101,7 @@
         break;
     }
   });
+  
   innitTable();
   renderBlocks();
 }());
