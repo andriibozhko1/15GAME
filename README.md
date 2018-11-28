@@ -1,2 +1,2 @@
 # 15GAME
-15 Game. 
+## This is my "15 GAME" project = https://andriibozhko1.github.io/15GAME/dist/
