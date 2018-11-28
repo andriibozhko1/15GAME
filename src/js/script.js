@@ -1,10 +1,10 @@
-(function() {
-  const container = document.querySelector(".container");
+(function () {
+  const container = document.querySelector('.container');
   const blocks = [];
   const cellQuantity = 16;
-  const shuffleBtn = document.querySelector(".btn");
+  const shuffleBtn = document.querySelector('.btn');
 
-  const innitTable = function() {
+  const innitTable = function () {
     for (let i = 0; i < cellQuantity; i++) {
       const table = {};
       table.id = i + 1;
@@ -15,20 +15,20 @@
       blocks.push(table);
     }
   };
-  const renderBlocks = function() {
-    container.innerHTML = "";
+  const renderBlocks = function () {
+    container.innerHTML = '';
     for (let i = 0; i < blocks.length; i++) {
-      const createBlock = document.createElement("div");
-      createBlock.classList.add("block");
+      const createBlock = document.createElement('div');
+      createBlock.classList.add('block');
       createBlock.innerHTML = blocks[i].id;
       if (blocks[i].isEmpty == true) {
-        createBlock.classList.add("move");
-        createBlock.innerHTML = "";
+        createBlock.classList.add('move');
+        createBlock.innerHTML = '';
       }
       container.appendChild(createBlock);
     }
   };
-  const moveBlock = function(item1, item2) {
+  const moveBlock = function (item1, item2) {
     const temp = blocks[item1];
     if (temp == undefined || temp > 4) {
       return;
@@ -37,7 +37,7 @@
     blocks[item2] = temp;
   };
 
-  const findEmptyBlock = function() {
+  const findEmptyBlock = function () {
     for (let i = 0; i < blocks.length; i++) {
       if (blocks[i].isEmpty == true) {
         return i;
@@ -45,26 +45,27 @@
     }
   };
 
-  const randomSort = function() {
+  const randomSort = function () {
     return Math.random() - 0.5;
   };
-  const winCombination = function() {
+  const winCombination = function () {
     for (let i = 0; i < blocks.length; i++) {
       if (blocks[i].id !== i + 1) {
         return;
       }
     }
-    alert("WIN!!!");
+    alert('WIN!!!');
   };
-  shuffleBtn.addEventListener("click", function() {
+  shuffleBtn.addEventListener('click', () => {
     blocks.sort(randomSort);
     renderBlocks();
   });
-  document.addEventListener("keydown", function(event) {
-    let x = findEmptyBlock();
+  document.addEventListener('keydown', (event) => {
+    const emptyBlock = findEmptyBlock();
+    
     switch (event.keyCode) {
       case 39:
-        if (x == 12 || x == 8 || x == 4) {
+        if (emptyBlock == 12 || emptyBlock == 8 || emptyBlock == 4) {
           return;
         }
         moveBlock(findEmptyBlock() - 1, findEmptyBlock());
@@ -72,7 +73,7 @@
         setTimeout(winCombination, 0);
         break;
       case 37:
-        if (x == 11 || x == 7 || x == 3) {
+        if (emptyBlock == 11 || emptyBlock == 7 || emptyBlock == 3) {
           return;
         }
         moveBlock(findEmptyBlock() + 1, findEmptyBlock());
@@ -93,4 +94,4 @@
   });
   innitTable();
   renderBlocks();
-})();
+}());
